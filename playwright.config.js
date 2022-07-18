@@ -1,10 +1,12 @@
 /** @type {import('@playwright/test').PlaywrightTestConfig} */
-import { devices  } from '@playwright/test';
+import { devices } from '@playwright/test';
 
 const url = 'https://localhost:3000';
 const config = {
   webServer: {
-    command: 'npm run build && npm run preview',
+    reuseExistingServer: !process.env.CI,
+    command: process.env.CI ? 'npm run preview' : 'npm run build:app && npm run preview',
+    timeout: 120 * 1000,
     ignoreHTTPSErrors: true,
     url,
   },
@@ -22,20 +24,18 @@ const config = {
       name: 'chromium',
       use: {
         ...devices['Desktop Chrome'],
-        ...devices['Desktop Chrome HiDPI'],
         ...devices['Desktop Edge'],
-        ...devices['Desktop Edge HiDPI'],
       },
     },
     {
       name: 'firefox',
-      use: { ...devices['Desktop Firefox'], ...devices['Desktop Firefox HiDPI'] },
+      use: { ...devices['Desktop Firefox'] },
     },
     // {
     //   name: 'webkit',
     //   use: { ...devices['Desktop Safari'], ...devices['iPad (gen 7)'] },
     // },
-  ]
+  ],
 };
 
 export default config;

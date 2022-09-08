@@ -1,0 +1,36 @@
+name: 'Deployment'
+on:
+  deployment:
+
+  pull_request:
+     branches-ignore:
+      - dependabot/**
+     types: 
+      - closed
+jobs:
+  deployment:
+    runs-on: ubuntu-latest 
+    environment: preview
+    container:
+      image: ghcr.io/ryanbas21/update-cors-am-github-action:main
+    steps:
+      - name: Get deployment URL
+        id: deployment
+        uses: dorshinar/get-deployment-url@master
+        timeout-minutes: 5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - run: echo ${{ steps.deployment.outputs.deployment }}
+      - name: 'Update CORS in AM'
+        uses: ryanbas21/update-cors-am-github-action@latest
+        with:
+          AM_URL: ${{ secrets.AM_URL }}
+          USERNAME: ${{ secrets.AM_USERNAME }}
+          PASSWORD: ${{ secrets.AM_PASSWORD }}
+          REALM_PATH: ${{ secrets.AM_REALM }}
+          ORIGINS: ${{ steps.deployment.outputs.deployment }}
+          COOKIE_NAME: ${{ secrets.COOKIE_NAME }}
+          REDIRECTION_URIS: ${{ secrets.REDIRECTION_URIS }}
+          REMOVE: false
+          CORS_CONFIG_NAME: ${{ secrets.CORS_CONFIG_NAME }}
+      

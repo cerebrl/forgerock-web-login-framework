@@ -1,10 +1,10 @@
 <script lang="ts">
-  import type { ChoiceCallback } from '@forgerock/javascript-sdk';
+  import type { HiddenValueCallback } from '@forgerock/javascript-sdk';
 
   import Centered from '$components/primitives/box/centered.svelte';
   import HiddenValue from './hidden-value.svelte';
 
-  export let callback: ChoiceCallback;
+  export let callback: HiddenValueCallback;
 </script>
 
 <Centered>

@@ -1,12 +1,14 @@
 <script lang="ts">
   import type { ChoiceCallback } from '@forgerock/javascript-sdk';
 
+  import Radio from '$components/compositions/radio/animated.svelte';
   import Select from '$components/compositions/select-floating/floating-label.svelte';
   import { interpolate, textToKey } from '$lib/_utilities/i18n.utilities';
 
   export let callback: ChoiceCallback;
   export let firstInvalidInput: boolean;
   export let idx: number;
+  export let displayType: 'radio' | 'select' = 'select';
 
   /** *************************************************************************
    * SDK INTEGRATION POINT

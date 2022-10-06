@@ -5,7 +5,7 @@
   import type { Maybe } from '$lib/interfaces';
   import Label from '$components/primitives/label/label.svelte';
 
-  export let defaultOption: number;
+  export let defaultOption: string | null = null;
   export let message = '';
   export let firstInvalidInput: boolean;
   export let isRequired = false;
@@ -13,7 +13,7 @@
   export let key: string;
   export let name: string;
   export let onChange: (event: Event) => void;
-  export let options: { value: number | null; text: string }[];
+  export let options: { value: string; text: string }[];
 
   // Below needs to be `undefined` to be optional and allow default value in Message component
   export let showMessage: Maybe<boolean> = undefined;

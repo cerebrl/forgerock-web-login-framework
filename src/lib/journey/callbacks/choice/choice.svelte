@@ -6,9 +6,9 @@
   import { interpolate, textToKey } from '$lib/_utilities/i18n.utilities';
 
   export let callback: ChoiceCallback;
+  export let displayType: 'radio' | 'select' = 'select';
   export let firstInvalidInput: boolean;
   export let idx: number;
-  export let displayType: 'radio' | 'select' = 'select';
 
   /** *************************************************************************
    * SDK INTEGRATION POINT

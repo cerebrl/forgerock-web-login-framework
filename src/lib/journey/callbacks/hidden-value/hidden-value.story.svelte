@@ -8,5 +8,5 @@
 </script>
 
 <Centered>
-  <HiddenValue {callback} idx={0} />
+  <HiddenValue {callback} firstInvalidInput={false} idx={0} />
 </Centered>

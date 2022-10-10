@@ -57,12 +57,25 @@
   }
 </script>
 
-<Select
-  {firstInvalidInput}
-  defaultOption={defaultChoice}
-  isRequired={false}
-  key={inputName}
-  {label}
-  onChange={setValue}
-  options={choiceOptions}
-/>
+{#if displayType === 'select'}
+  <Select
+    {firstInvalidInput}
+    defaultOption={defaultChoice}
+    isRequired={false}
+    key={inputName}
+    {label}
+    onChange={setValue}
+    options={choiceOptions}
+  />
+{:else}
+  <Radio
+    {firstInvalidInput}
+    defaultOption={defaultChoice}
+    isRequired={false}
+    key={inputName}
+    groupLabel={prompt}
+    onChange={setValue}
+    name={inputName}
+    options={choiceOptions}
+  />
+{/if}

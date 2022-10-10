@@ -8,7 +8,7 @@
   export let defaultOption: string | null = null;
   export let message = '';
   export let firstInvalidInput: boolean;
-  export let groupMessage: string;
+  export let groupLabel: string = '';
   export let isRequired = false;
   export let isInvalid = false;
   export let key: string;
@@ -29,7 +29,7 @@
 </script>
 
 <fieldset>
-  <legend>{groupMessage}</legend>
+  <legend class="tw_input-label dark:tw_input-label_dark tw_font-bold tw_mb-4">{groupLabel}</legend>
   <div>
     {#each options as option}
       <div class="tw_input-spacing">

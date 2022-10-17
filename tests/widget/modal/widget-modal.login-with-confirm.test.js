@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-test.only('Modal widget with simple login and confirmation', async ({ page }) => {
+test('Modal widget with simple login and confirmation', async ({ page }) => {
   await page.goto('widget/modal?journey=LoginTestCallbacks');
 
   const loginButton = page.locator('button', { hasText: 'Open Login Modal' });

@@ -23,7 +23,7 @@
   const label = interpolate(textToKey(prompt), null, prompt);
 
   let choiceOptions: { value: string; text: string }[];
-  let defaultChoice: string;
+  let defaultChoice: string | null;
 
   /**
    * @function setValue - Sets the value on the callback on element blur (lose focus)
@@ -59,7 +59,7 @@
       text: interpolate(textToKey(text), null, text),
       value: `${idx}`,
     }));
-    defaultChoice = `${callback.getDefaultChoice()}`;
+    defaultChoice = `${callback.getDefaultChoice()}` || null;
   }
 </script>
 

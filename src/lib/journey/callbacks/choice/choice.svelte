@@ -4,6 +4,7 @@
   import Radio from '$components/compositions/radio/animated.svelte';
   import Select from '$components/compositions/select-floating/floating-label.svelte';
   import { interpolate, textToKey } from '$lib/_utilities/i18n.utilities';
+  import type { Maybe } from '$lib/interfaces';
 
   export let callback: ChoiceCallback;
   export let displayType: 'radio' | 'select' = 'select';
@@ -23,7 +24,7 @@
   const label = interpolate(textToKey(prompt), null, prompt);
 
   let choiceOptions: { value: string; text: string }[];
-  let defaultChoice: string | null;
+  let defaultChoice: Maybe<string>;
 
   /**
    * @function setValue - Sets the value on the callback on element blur (lose focus)

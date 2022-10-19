@@ -5,7 +5,7 @@
   import type { Maybe } from '$lib/interfaces';
   import Label from '$components/primitives/label/label.svelte';
 
-  export let defaultOption: string | null = null;
+  export let defaultOption: Maybe<string> = null;
   export let message = '';
   export let firstInvalidInput: boolean;
   export let groupLabel: string = '';

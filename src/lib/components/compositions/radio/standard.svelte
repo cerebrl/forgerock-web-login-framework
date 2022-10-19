@@ -3,7 +3,7 @@
   import Message from '$components/primitives/message/input-message.svelte';
   import type { Maybe } from '$lib/interfaces';
 
-  export let defaultOption: string | null = null;
+  export let defaultOption: Maybe<string> = null;
   export let message = '';
   export let firstInvalidInput: boolean;
   export let groupLabel: string = '';

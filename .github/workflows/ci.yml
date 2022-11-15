@@ -4,29 +4,76 @@ on:
     branches-ignore:
       - dependabot/**
 jobs:
-  pr:
+  install:
+    timeout-minutes: 60
     strategy:
       matrix:
-        node: [16.x]
-        os: [macos-latest, ubuntu-latest] #, windows-latest]
+        node: [16.x] # tests both npm 7 & 8
+        os: [macos-latest, ubuntu-latest] # , windows-latest]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        id: cache-node-modules
         with:
-          fetch-depth: 0
-      - name: Node ${{ matrix.node }} Run
-        uses: actions/setup-node@v3
+          path: |
+            node_modules
+          key: ${{ runner.os}}-modules-${{ hashFiles('package-lock.json') }}
+      - name: Cache Playwright binaries
+        uses: actions/cache@v3
+        id: cache-playwright
         with:
-          node-version: ${{ matrix.node }}
-          cache: 'npm'
-      - run: npm ci
-      - run: npm install -g @lhci/cli@0.8.x
-      - run: npm run build
-      - run: npx playwright install  --with-deps
+          path: |
+            ~/.cache/ms-playwright
+          key: ${{runner.os}}-playwright-${{ hashFiles('package-lock.json') }}
+      - name: npm clean-install
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        run: npm ci
+      - name: Install Playwright Browsers
+        if: steps.cache-playwright.outputs.cache-hit != 'true'
+        run: npx playwright install --with-deps
+  test:
+    name: "\U0001F9EA Test ${{ matrix.os }}- (${{ matrix.shard }}/2)"
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [16.x]
+        shard: [1, 2]
+        os: [macos-latest, ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    needs: install
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: |
+            node_modules
+          key: ${{ runner.os}}-modules-${{ hashFiles('package-lock.json') }}
+      - name: Cache Playwright
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache/ms-playwright
+          key: ${{ runner.os}}-playwright-${{ hashFiles('package-lock.json') }}
+      - name: Test
+        run: npm run ci
+      - name: Build
+        run: npm run build
       - name: E2E
-        run: npm run ci:e2e
+        run: npx playwright test --shard=${{ matrix.shard }}/${{ strategy.job-total }}
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: playwright-report-${{ matrix.shard }}_${{ strategy.job-total }}
+          path: playwright-report
+          retention-days: 30
       - name: Publish to Chromatic
-        if: ${{ matrix.os == 'ubuntu-latest' }}
+        if: ${{ matrix.os == 'macos-latest' }}
         uses: chromaui/action@v1
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}

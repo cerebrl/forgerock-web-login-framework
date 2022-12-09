@@ -3,9 +3,6 @@ on:
   pull_request:
     branches:
       - main
-      - next
-      - beta
-      - alpha
 jobs:
   preview:
     runs-on: ubuntu-latest

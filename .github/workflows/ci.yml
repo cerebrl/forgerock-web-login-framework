@@ -21,6 +21,9 @@ jobs:
           cache: 'npm'
       - run: npm ci
       - run: npm run build
+      - name: Publish with Verdaccio
+        if: ${{ matrix.os == 'ubuntu-latest' }}
+        uses: verdaccio/github-actions/publish@master
       - name: Publish to Chromatic
         if: ${{ matrix.os == 'ubuntu-latest' && matrix.node < 17 && !github.event.pull_request.draft }}
         uses: chromaui/action@v1

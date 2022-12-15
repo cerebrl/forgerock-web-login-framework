@@ -23,10 +23,12 @@ test('modal widget and testing changing journeys', async ({ page }) => {
 
   // Change to go back to Sign In
   const backToSignInBtn = page.getByRole('link', { name: 'Sign in here!' });
+  await backToSignInBtn.waitFor({ state: 'visible' });
   await backToSignInBtn.click();
 
   // Click "forgot password"
   const forgotPasswordBtn = page.getByRole('button', { name: 'Forgot password?' });
+  await forgotPasswordBtn.waitFor({ state: 'visible' });
   await forgotPasswordBtn.click();
 
   const forgotPasswordHeader = page.getByText('Reset Password');

@@ -7,7 +7,7 @@ import '../../app.css';
 configure({
   clientId: 'WebOAuthClient',
   // redirectUri: 'https://crbrl.ngrok.io/callback',
-  redirectUri: 'https://localhost:3000/callback',
+  redirectUri: 'https://localhost:8443/callback',
   scope: 'openid profile me.read',
   serverConfig: {
     baseUrl: 'https://openam-crbrl-01.forgeblocks.com/am/',

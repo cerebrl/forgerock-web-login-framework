@@ -133,7 +133,13 @@
     />
   {/each}
 
-  {#if stepMetadata.isUserInputOptional || !stepMetadata.isStepSelfSubmittable}
+  {#if step.callbacks[0].payload.type === 'TextOutputCallback' && stepMetadata.isStepSelfSubmittable && !stepMetadata.isUserInputOptional}
+    <Button busy={false} style="primary" type="submit" width="full">
+      <T key="nextButton" />
+    </Button>
+
+  {/if}
+  {#if stepMetadata.isUserInputOptional || !stepMetadata.isStepSelfSubmittable }
     <Button busy={journey?.loading} style="primary" type="submit" width="full">
       <T key="nextButton" />
     </Button>

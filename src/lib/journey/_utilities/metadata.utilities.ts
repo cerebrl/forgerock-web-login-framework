@@ -74,6 +74,9 @@ export function buildCallbackMetadata(
 export function buildStepMetadata(callbackMetadataArray: CallbackMetadata[]) {
   const numOfUserInputCbs = callbackMetadataArray.filter((cb) => !!cb.isUserInputRequired).length;
   const userInputOptional = isUserInputOptional(callbackMetadataArray, numOfUserInputCbs);
+  const shouldRenderNextButton = callbackMetadataArray.every(
+    (cb) => !cb.isUserInputRequired && !cb.isSelfSubmitting,
+  );
 
   return {
     isStepSelfSubmittable: isStepSelfSubmittable(callbackMetadataArray, userInputOptional),
@@ -81,6 +84,7 @@ export function buildStepMetadata(callbackMetadataArray: CallbackMetadata[]) {
     numOfCallbacks: callbackMetadataArray.length,
     numOfSelfSubmittableCbs: callbackMetadataArray.filter((cb) => !!cb.isSelfSubmitting).length,
     numOfUserInputCbs: numOfUserInputCbs,
+    shouldRenderNextButton,
   };
 }
 
@@ -98,7 +102,7 @@ export function canForceUserInputOptionality(callback: FRCallback) {
   // See if a callback function exists within this collection
   const fn =
     forceUserInputOptionalityCallbacks[
-      callback.getType() as keyof typeof forceUserInputOptionalityCallbacks
+    callback.getType() as keyof typeof forceUserInputOptionalityCallbacks
     ];
 
   // If there is a function, run it and it will return a boolean

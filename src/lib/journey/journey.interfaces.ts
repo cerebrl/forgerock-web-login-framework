@@ -75,6 +75,7 @@ export interface StepMetadata {
   numOfCallbacks: number;
   numOfSelfSubmittableCbs: number;
   numOfUserInputCbs: number;
+  shouldRenderNextButton: boolean;
 }
 export type SelfSubmitFunction = () => void;
 export type StepTypes = WidgetStep | FRLoginSuccess | FRLoginFailure | null;

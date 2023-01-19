@@ -20,6 +20,7 @@
     numOfCallbacks: 2,
     numOfSelfSubmittableCbs: 0,
     numOfUserInputCbs: 2,
+    shouldRenderNextButton: false,
   };
 </script>
 

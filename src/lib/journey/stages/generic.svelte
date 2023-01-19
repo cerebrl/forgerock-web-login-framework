@@ -133,7 +133,13 @@
     />
   {/each}
 
-  {#if stepMetadata.isUserInputOptional || !stepMetadata.isStepSelfSubmittable }
+  {#if stepMetadata.shouldRenderNextButton }
+    <Button busy={false} style="primary" type="submit" width="full">
+      <T key="nextButton" />
+    </Button>
+  {/if}
+
+  {#if stepMetadata.isUserInputOptional || !stepMetadata.isStepSelfSubmittable && !stepMetadata.shouldRenderNextButton }
     <Button busy={journey?.loading} style="primary" type="submit" width="full">
       <T key="nextButton" />
     </Button>

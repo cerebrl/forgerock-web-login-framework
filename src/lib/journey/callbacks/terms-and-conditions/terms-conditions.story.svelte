@@ -21,6 +21,7 @@
     numOfCallbacks: 2,
     numOfSelfSubmittableCbs: 0,
     numOfUserInputCbs: 2,
+    shouldRenderNextButton: false,
   };
   // Initialize links
   initialize({ termsAndConditions: 'https://www.forgerock.com/terms' });

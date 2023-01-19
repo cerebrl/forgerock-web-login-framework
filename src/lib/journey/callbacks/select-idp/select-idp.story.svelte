@@ -26,6 +26,7 @@
     numOfCallbacks: 1,
     numOfSelfSubmittableCbs: 1,
     numOfUserInputCbs: 0,
+    shouldRenderNextButton: false,
   };
 </script>
 

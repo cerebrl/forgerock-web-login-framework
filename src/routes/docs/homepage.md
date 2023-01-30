@@ -4,9 +4,9 @@
 
 # ForgeRock Web Login Framework
 
-## WARNING: VAPORWARE
+## WARNING: ALPHA VERSION
 
-**This is a prototype of a development framework for generating a ForgeRock Login App for self-hosting or JavaScript Widget into an existing self-hosted SPA (React, Vue, Angular, etc.). This project is not officially supported and is not recommended for any product development. If you use this, you accept all the risks that come with completely unsupported software.**
+**This is a early preview (alpha) of a development framework for generating a JavaScript Widget into an existing self-hosted SPA (React, Vue, Angular, etc.). Eventually, this same framework will also generate a ForgeRock Login App for self-hosting. This project is not yet officially supported and is not recommended for any project development. If you use this, you accept all the risks that come with completely unsupported software.**
 
 <Image>
 
@@ -16,15 +16,19 @@
 
 ## Summary
 
-This Web Login Framework is a development tool set for easily developing an alternative to the ForgeRock-hosted login application or building your own login application or component from scratch. The first product to be provided by this framework is the Login Widget which is a JavaScript component that can be installed into any modern JavaScript application. A future product provided by this framework will be a self-contained Login Application that can be self-hosted which will be useful as a centralized login app to your ecosystem of applications.
+The Login Widget produced by this framework is intended to be an all-inclusive, UI component that can be installed with any modern JavaScript app for handling the default login, registration and related user flows. It can be used within a React, Vue, Angular or any other modern JavaScript framework (does not currently support Node.js or server-rendering (SSR)).
 
 ## ForgeRock Login Widget
 
-The Login Widget is an embeddable JavaScript component that can be used within any modern JavaScript SPA (Single Page Application). It requires no "runtime" UI libraries or frameworks, so it can be used within a React, Angular, Vue, etc. application without any additional dependencies.
+The Login Widget, currently in alpha, is an embeddable JavaScript component that requires no "runtime" UI libraries or frameworks, allowing it to be used within a React, Angular, Vue, etc. application without any additional dependencies.
 
-This Login Widget is compatible with ForgeRock AM trees or Identity Cloud journeys and their built-in nodes and their corresponding callbacks. [Please see our "Roadmap" section for current limitations and planned features](/docs/widget/roadmap).
+This Widget helps you easily integrate your existing or new apps with the ForgeRock platform and its journeys. It supports the rendering of the built-in nodes and their corresponding callbacks within authentication and self-service journeys. [Please see our "Roadmap" section for current limitations and planned features](/docs/widget/roadmap).
 
 [Please visit our "Widget Docs" for the quick-start and full API documentation](/docs/widget).
+
+## ForgeRock Login App
+
+This is a future proposal that would leverage this framework to produce an independent, customizable application for self-hosting, in addition to producing the Login Widget. This Login App would be recommended for use in building a custom, self-hosted, centralized login experience. Let us know if this is of interest to you.
 
 ## Contributing to the Framework
 
